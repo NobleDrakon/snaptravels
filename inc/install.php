@@ -21,7 +21,7 @@ if($conn) {
 	// Check user is not installing sample data
 	if (!isset($_POST['installSampleData'])) {
 
-		// Set up database
+		/* Set up database tables */
 
 		// DROP ALL TABLES
 		// Prepare SQL Query to drop tables and ignore foreign key constraint checks
@@ -109,7 +109,7 @@ if($conn) {
 		</form>
 _END;
 	} else {
-
+		/* Insert Sample Data */
 
 
 	}

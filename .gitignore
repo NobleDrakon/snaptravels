@@ -1,1 +1,4 @@
 inc/config.php
+vendor/
+README.md
+test.php

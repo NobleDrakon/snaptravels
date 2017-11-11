@@ -1,7 +1,7 @@
 <?php
 
 // SAMPLE CONFIG FILE
-// To Use: enter connect
+// To Use: enter database connection details and rename file to config
 
 // MySQL CONNECTION
 // Define database connection details

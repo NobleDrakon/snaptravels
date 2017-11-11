@@ -20,7 +20,7 @@ if($conn) {
 
 	// Check user is not installing sample data
 	if (!isset($_POST['installSampleData'])) {
-
+		
 		/* Set up database tables */
 
 		// DROP ALL TABLES
@@ -103,14 +103,99 @@ if($conn) {
 		// Ask user if sample data required
 		echo <<<_END
 		<form method="post">
-		<input type="hidden" name="installSampleData" value="true">
-		<label>Would you like to insert sample data?</label>
-		<button type="submit">Yes</button>
+			<input type="hidden" name="installSampleData" value="true">
+			<label>Would you like to insert sample data?</label>
+			<button type="submit">Yes</button>
 		</form>
 _END;
 	} else {
-		/* Insert Sample Data */
+		
+		// Initial data for the INSERT statements
 
+		// Create cuisines data in an array
+		$cuisines = [
+			[
+				'name' => 'Asian',
+				'socialQuery' => '#japanese OR #chinese OR #thai OR #asian OR #noodles AND #cuisine'
+			],
+			[
+				'name' => 'Indian',
+				'socialQuery' => '#korma OR #jalfrezi OR #vindaloo OR #dhansak OR #bhuna AND #cuisine'
+			],
+			[
+				'name' => 'Mexican',
+				'socialQuery' => '#tacos OR #burritos OR #nachos OR #fajitas OR #enchiladas AND #cuisine'
+			],
+			[
+				'name' => 'Italian',
+				'socialQuery' => '#lasagne OR #spaghetti OR #tagliatelle OR #pizza OR #pasta AND #cuisine'
+			],
+			[
+				'name' => 'Greek',
+				'socialQuery' => '#olives OR #moussaka OR #feta OR #dolmades OR #taramasalata AND #cuisine'
+			],
+			[
+				'name' => 'British',
+				'socialQuery' => '#yorkshirepuddings OR #toadinahole OR #shepherdspie OR #fishandchips OR #englishbreakfast AND #cuisine'
+			],
+			[
+				'name' => 'American',
+				'socialQuery' => '#steak OR #hotdogs OR #pancakes OR #waffles OR #fries AND #cuisine'
+			],
+			[
+				'name' => 'French',
+				'socialQuery' => '#coqauvin OR #cassoulet OR #beefbourguignon OR #souffle OR #croissants AND #cuisine'
+			]
+		];
+
+		// for each item in array, create a row in the cuisines table
+		foreach($cuisines as $cuisine){
+			$query = $conn->prepare("INSERT INTO cuisines (name, socialQuery) VALUES ('" . $cuisine['name'] . "', '" . $cuisine['socialQuery'] . "')");
+			if($query->execute()){
+				echo "Inserted " . $cuisine['name'] . " into cusines table! <br>";
+			}
+		}
+
+		// separate insert statements between each table
+		echo "<br>";
+
+		// Types
+		$types = [
+			[
+				'name' => 'Skiing',
+				'socialQuery' => '#ski OR #mountain OR #skislope OR #snow OR #wintersports AND #holiday'
+			],
+			[
+				'name' => 'Beach',
+				'socialQuery' => '#exoticbeach OR #whitesand OR #whitebeach OR #tropicalisland OR #clearwater AND #holiday'
+			],
+			[
+				'name' => 'City',
+				'socialQuery' => '#skyscraper OR #newyork OR #city OR #london OR #paris AND #holiday'
+			],
+			[
+				'name' => 'Adventure',
+				'socialQuery' => '#mountain OR #jungle OR #expedition OR #desert OR #adventure AND #holiday'
+			],
+			[
+				'name' => 'Safari',
+				'socialQuery' => '#elephants OR #safari OR #lions OR #zebras OR #rhinos AND #holiday'
+			]
+		];
+
+		// for each item in array, create a row in the cuisines table
+		foreach($types as $type){
+			$query = $conn->prepare("INSERT INTO cuisines (name, socialQuery) VALUES ('" . $type['name'] . "', '" . $type['socialQuery'] . "')");
+			if($query->execute()){
+				echo "Inserted " . $type['name'] . " into types table! <br>";
+			}
+		}
+
+		// separate insert statements between each table
+		echo "<br>";
+
+		// Places
+		$places = [];
 
 	}
 
